@@ -130,3 +130,4 @@ STATICFILES_DIRS = [
 
 # In production
 STATIC_ROOT = BASE_DIR / "staticfiles"  # Where static files will be collected
+ALLOWED_HOSTS = ['*']  # For simplicity, allow all hosts
