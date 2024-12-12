@@ -86,5 +86,18 @@ def populate_seats(request):
 
 
 def get_booked_seats(request):
-        booked_seats = Seat.objects.filter(is_booked=True)
-        return JsonResponse({"booked_seats": [f"{seat.row}{seat.seat_number}" for seat in booked_seats]})   
+        seats = Seat.objects.all()
+#         [
+#   {"row": "A", "seat_number": "1", "is_booked": true},
+#   {"row": "B", "seat_number": "2", "is_booked": true}
+# ]     
+        booked_seats = [
+            {
+                "row": seat.row,
+                "seat_number": seat.seat_number,
+                "is_booked": seat.is_booked
+            }
+            for seat in seats
+        ]
+        return JsonResponse({"booked_seats": booked_seats})
+           

@@ -9,7 +9,7 @@ This is a simple API for managing seat bookings in a train. The API allows users
    - **Request Body**:
      ```json
      {
-       "seat_numbers": ["A1", "B2", "C3"]
+       "seat_numbers": ["A1", "A2", "A3"]
      }
      ```
 
