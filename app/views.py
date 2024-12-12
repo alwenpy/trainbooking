@@ -83,3 +83,9 @@ def populate_seats(request):
             if not len(seat.seat_number) == 80:  # Check if seat_number is not of length 80 (validation step)
                 seat.save() 
     return JsonResponse({"message": "Seats populated successfully!"})
+
+
+class get_booked_seats:
+    def get(self):
+        booked_seats = Seat.objects.filter(is_booked=True)
+        return JsonResponse({"booked_seats": [f"{seat.row}{seat.seat_number}" for seat in booked_seats]})   
