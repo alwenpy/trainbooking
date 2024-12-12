@@ -85,7 +85,6 @@ def populate_seats(request):
     return JsonResponse({"message": "Seats populated successfully!"})
 
 
-class get_booked_seats:
-    def get(self):
+def get_booked_seats(request):
         booked_seats = Seat.objects.filter(is_booked=True)
         return JsonResponse({"booked_seats": [f"{seat.row}{seat.seat_number}" for seat in booked_seats]})   
