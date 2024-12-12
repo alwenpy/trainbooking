@@ -1,30 +1,62 @@
 # Train Booking API
 
-This is a simple API for managing seat bookings in a train. The API allows users to book seats, retrieve booked seats, and populate available seats.
+This is a simple API for managing seat bookings in a train. The API allows users to book seats, retrieve all seat information, get details of booked seats, and populate seats initially.
 
 ## Endpoints
 
 1. **`POST /book-seats/`**  
-   - **Description**: Books selected seats for a user. The request body should include the seat numbers to be booked.
+   - **Description**: Books a specified number of available seats. The request body should contain the number of seats to book.
    - **Request Body**:
      ```json
      {
-       "seat_numbers": ["A1", "A2", "A3"]
+       "num_seats": 3
+     }
+     ```
+   - **Response**:
+     - **Success**: 
+       ```json
+       {
+         "booked_seats": ["A1", "A2", "A3"]
+       }
+       ```
+     - **Error** (if not enough seats available): 
+       ```json
+       {
+         "error": "Not enough seats available"
+       }
+       ```
+
+2. **`POST /populate-seats/`**  
+   - **Description**: Populates seats in the system. This endpoint creates seats with row labels from `A` to `L` and seat numbers from `1` to `7`.
+   - **Response**:
+     ```json
+     {
+       "message": "Seats populated successfully!"
      }
      ```
 
-2. **`POST /populate_seats/`**  
-   - **Description**: Populates seats in the system. This endpoint could be used to populate the initial available seat data.
-   - **Request Body**: No specific data required. This endpoint would populate seats based on pre-defined logic.
-
-3. **`GET /booked-seats/`**  
-   - **Description**: Returns a list of all the seats that have been booked.
+3. **`GET /seat-info/`**  
+   - **Description**: Returns all seat information, including whether each seat is booked or not.
    - **Response**:
      ```json
-     [
-       {"row": "A", "seat_number": "1", "is_booked": true},
-       {"row": "B", "seat_number": "2", "is_booked": true}
-     ]
+     {
+       "booked_seats": [
+         {"row": "A", "seat_number": "1", "is_booked": true},
+         {"row": "B", "seat_number": "2", "is_booked": false}
+       ]
+     }
+     ```
+
+4. **`GET /get-booked-seats/`**  
+   - **Description**: Returns a list of all booked seats.
+   - **Response**:
+     ```json
+     {
+       "booked_seats": [
+         {"row": "A", "seat_number": "1"},
+         {"row": "B", "seat_number": "2"}
+       ]
+     }
      ```
 
 ## Models
